@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 const localCache = {};
 
 export const useFetch = (url) => {
-  
+
    const [state, setState] = useState({
       data: null,
       isLoading: true,
@@ -13,7 +13,7 @@ export const useFetch = (url) => {
    })
 
    useEffect(() => {
-      getFetch();
+      getFetch(url);
    }, [url]);
 
    const setLoadingState = () => {
@@ -25,8 +25,8 @@ export const useFetch = (url) => {
       });
    }
 
-   const getFetch = async () => {
-      if(localCache[url]){
+   const getFetch = async (url) => {
+      if (localCache[url]) {
          console.log('data from cache');
          setState({
             data: localCache[url],
@@ -38,13 +38,13 @@ export const useFetch = (url) => {
       }
       setLoadingState();
 
-      const response = await fetch (url);
+      const response = await fetch(url);
 
       // sleep(2000);
 
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      if(!response.ok){
+      if (!response.ok) {
          return setState({
             data: null,
             isLoading: false,
@@ -53,18 +53,19 @@ export const useFetch = (url) => {
          });
       }
       const data = await response.json();
-      setState ({
+
+      setState({
          data,
          isLoading: false,
          hasError: false,
          errorMessage: null
-      
+
       });
 
       localCache[url] = data;
 
    }
-   return{
+   return {
       data: state.data,
       isLoading: state.isLoading,
       hasError: state.hasError,

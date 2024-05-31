@@ -24,12 +24,12 @@ export const Layout = () => {
                   data.sprites.front_shiny,
                   data.sprites.back_shiny
                ]}
+               abilities={data.abilities}
             />)
          }
 
-
-         <button onClick={() => counter > 1 ? decrement() : null} className="btn btn-primary mt2">Previous Pokemon</button>
-         <button onClick={() => increment()} className="btn btn-primary mt2">Next Pokemon</button>
+         <button type="button" onClick={() => counter > 1 ? decrement() : null} className="btn btn-primary mt2">Previous Pokemon</button>
+         <button type="button" onClick={() => increment()} className="btn btn-primary mt2 ">Next Pokemon</button>
       </>
    )
 }
